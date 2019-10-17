@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavigationBar from './../navigation/NavigationBar'
+import "../styles.scss";
 
 class AppLayout extends Component {
     async componentDidMount() {
@@ -28,7 +29,7 @@ class AppLayout extends Component {
             <Fragment>
                 <BrowserRouter>
                     <NavigationBar
-                        divTagClassName="navlinks-wrapper"
+                        divTagClassName="navlinks-wrapper color-red"
                         ulTagClassName="nav nav-horizontal"
                         tabs={globalNavTabs}
                         selectedTabId={'people'}
@@ -37,13 +38,13 @@ class AppLayout extends Component {
                         <Route
                             path={'/people'}
                             render={() => (
-                                <div>Page container</div>
+                                <div className="color-red">Page container</div>
                             )}
                         />
                         <Route
                             path={'/settings'}
                             render={() => (
-                                <div>Settings container</div>
+                                <div className="color-red">Settings container</div>
                             )}
                         />                        
                         <Redirect exact from={'/'} to={'/people'} />
