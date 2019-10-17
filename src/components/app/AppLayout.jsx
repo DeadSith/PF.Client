@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import NavigationBar from './../navigation/NavigationBar'
-import "../styles.scss";
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import NavigationBar from '../navigation/NavigationBar';
+import EnhanceЕdTable from '../table/EnhanceЕdTable';
+import '../styles.scss';
+import PaddingLayout, { Padding } from '../padding';
 
 class AppLayout extends Component {
-    async componentDidMount() {
-    }
+    async componentDidMount() {}
 
-    componentDidUpdate(prevProps) {
-    }
+    componentDidUpdate(prevProps) {}
 
     render() {
         const globalNavTabs = [
@@ -22,46 +21,43 @@ class AppLayout extends Component {
                 id: 'settings',
                 title: 'Settings',
                 path: '/settings',
-            }
+            },
         ];
 
         return (
-            <Fragment>
+            <>
                 <BrowserRouter>
                     <NavigationBar
                         divTagClassName="navlinks-wrapper color-red"
                         ulTagClassName="nav nav-horizontal"
                         tabs={globalNavTabs}
-                        selectedTabId={'people'}
+                        selectedTabId="people"
                     />
                     <Switch>
                         <Route
-                            path={'/people'}
-                            render={() => (
-                                <div className="color-red">Page container</div>
-                            )}
+                            path="/people"
+                            render={() => <div className="color-red">Page container</div>}
                         />
                         <Route
-                            path={'/settings'}
+                            path="/settings"
                             render={() => (
-                                <div className="color-red">Settings container</div>
+                                <PaddingLayout>
+                                    <Padding p={2} dimension={`em`}>
+                                        <EnhanceЕdTable />
+                                    </Padding>
+                                </PaddingLayout>
                             )}
-                        />                        
-                        <Redirect exact from={'/'} to={'/people'} />
+                        />
+                        <Redirect exact from="/" to="/people" />
                     </Switch>
                 </BrowserRouter>
-
-            </Fragment>
+            </>
         );
     }
 }
 
-AppLayout.defaultProps = {
+AppLayout.defaultProps = {};
 
-};
-
-AppLayout.propTypes = {
-
-};
+AppLayout.propTypes = {};
 
 export default AppLayout;
