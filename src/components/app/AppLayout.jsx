@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import NavigationBar from '../navigation/NavigationBar';
 import EnhanceЕdTable from '../table/EnhanceЕdTable';
+import MaterialTableDemo from '../table/MaterialTableDemo';
 import '../styles.scss';
-import PaddingLayout, { Padding } from '../padding';
+import GridLayout, { GridLayoutRow } from '../GridLayout';
 
 class AppLayout extends Component {
     async componentDidMount() {}
@@ -36,18 +37,16 @@ class AppLayout extends Component {
                     <Switch>
                         <Route
                             path="/people"
-                            render={() => <div className="color-red">Page container</div>}
-                        />
-                        <Route
-                            path="/settings"
                             render={() => (
-                                <PaddingLayout>
-                                    <Padding p={2} dimension={`em`}>
-                                        <EnhanceЕdTable />
-                                    </Padding>
-                                </PaddingLayout>
+                                <GridLayout>
+                                    <GridLayoutRow grid="offset_1-4-offset_2-4" gapColumn={2}>
+                                        <div key="q">GridRow1</div>
+                                        <div key="b">GridRow1</div>
+                                    </GridLayoutRow>
+                                </GridLayout>
                             )}
                         />
+                        <Route path="/settings" render={() => <EnhanceЕdTable />} />
                         <Redirect exact from="/" to="/people" />
                     </Switch>
                 </BrowserRouter>
