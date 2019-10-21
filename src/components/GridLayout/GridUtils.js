@@ -36,11 +36,7 @@ export const getGridItemsStyles = gridItems => {
     return gridStyles;
 };
 
-export const getGridSchema = baseGrid => {
-    return range(baseGrid).reduce(arr => {
-        return arr.push('1fr');
-    }, []);
-};
+export const getGridSchema = baseGrid => range(baseGrid).reduce(arr => [...arr, '1fr'], []);
 
 export const getBaseGridStyles = (baseGrid, gapColumn) => {
     return {
@@ -54,8 +50,7 @@ export const isValidGrid = gridItems => {
     if (gridItems.length > 0) {
         return (
             gridItems.reduce((counter, gridItem) => {
-                counter += Number(Object.values(gridItem));
-                return counter;
+                return counter + Number(Object.values(gridItem));
             }, 0) <= 12
         );
     }
