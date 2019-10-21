@@ -1,11 +1,11 @@
 const GridUtils = {
-    isGapDimension: function(dimension) {
+    isGapDimension(dimension) {
         return dimension.split('_').length > 1;
     },
-    getGap: gridProps => {
+    getGap(gridProps) {
         return gridProps.split('_')[1];
     },
-    isValidGrid: function(grid) {
+    isValidGrid(grid) {
         return (
             grid.reduce((counter, gridItem) => {
                 counter += Number(Object.values(gridItem));
@@ -13,7 +13,7 @@ const GridUtils = {
             }, 0) <= 12
         );
     },
-    getGridItems: function(grid) {
+    getGridItems(grid) {
         return grid.split('-').reduce((propsObj, gridProps) => {
             if (this.isGapDimension(gridProps)) {
                 propsObj.push({
@@ -27,7 +27,7 @@ const GridUtils = {
             return propsObj;
         }, []);
     },
-    getGridItemsStyles: function(gridItems) {
+    getGridItemsStyles(gridItems) {
         const gridStyles = [];
         for (let i = 0, counter = 1; i < gridItems.length; i++) {
             if (Object.keys(gridItems[i]) == 'col') {
@@ -42,6 +42,21 @@ const GridUtils = {
         }
         return gridStyles;
     },
-}
+    getBaseGridStyles(baseGrid, gapColumn) {
+        const gridSchema = this.getGridSchema(baseGrid);
+        const gridStyle = {
+            display: 'grid',
+            gridColumnGap: `${gapColumn}em`,
+        };
+        gridStyle.gridTemplateColumns = gridSchema.join(' ');
+        return { ...gridStyle };
+    },
+    getGridSchema(baseGrid) {
+        const gridSchema = [];
+        for (let i = 0; baseGrid > i; ++i) {
+            gridSchema.push('1fr');
+        }
+    },
+};
 
 export default GridUtils;
