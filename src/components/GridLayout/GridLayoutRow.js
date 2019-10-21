@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import styles from './styles/index.scss';
 
 const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
-    const componentClassName = classNames(styles.gridBox);
-
     const isGapDimension = dimension => {
         return dimension.split('_').length > 1;
     };
@@ -43,11 +40,8 @@ const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
         }, []);
     };
 
-    const getGridItemsStyles = () => {
-        const gridItems = getGridItems();
-        console.log(gridItems);
+    const getGridItemsStyles = (gridItems) => {
         const gridStyles = [];
-
         for (let i = 0, counter = 1; i < gridItems.length; i++) {
             if (Object.keys(gridItems[i]) == 'col') {
                 gridStyles.push({
@@ -64,45 +58,35 @@ const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
 
     const isValidGrid = grid => {
         return (
-            grid.split('-').reduce((counter, gridProps) => {
-                counter += gridProps;
+            grid.reduce((counter, gridItem) => {
+                counter += Number(Object.values(gridItem));
                 return counter;
             }, 0) <= 12
         );
     };
 
-    const gridItemsStyles = getGridItemsStyles();
-    let gridRow;
-    // if(isValidGrid(grid)) {
-    // 	gridRow =
-    // 		<div style={getGrid()}>
-    // 			{
-    // 				children.map((child, index) => {
-    // 					return <div style={gridItemsStyles[index]}>{child}</div>
-    // 				})
-    // 			}
-    // 		</div>
-    // } else {
-    // 	gridRow =
-    // 		<div style={getBaseGrid()}>
-    // 			{
-    // 				children.map((child) => {
-    // 					return <div>{child}</div>
-    // 				})
-    // 			}
-    // 		</div>
-    // }
-    // return gridRow;
-
-	return (
-		<div className={componentClassName}>
-			{
-				children.map((child, index) => {
-					return <div style={gridItemsStyles[index]}>{child}</div>
-				})
-			}
-		</div>
-	);
+    let gridItems = getGridItems();
+    if (isValidGrid(gridItems)) {
+		const gridItemsStyles = getGridItemsStyles(gridItems);
+        return (
+            <div className="gridBox">
+                {children.map((child, index) => {
+                    return (
+                        <div key={`griditem_${index}`} style={gridItemsStyles[index]}>
+                            {child}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
+    return (
+        <div style={getBaseGrid()}>
+            {children.map((child, index) => {
+                return <div key={`griditem_${index}`}>{child}</div>;
+            })}
+        </div>
+    );
 };
 
 GridLayoutRow.defaultProps = {
