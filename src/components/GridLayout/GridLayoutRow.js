@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './styles/styles.scss';
-import GridUtils from './GridUtils';
+import { getGridItemsStyles, getBaseGridStyles, getGridItems, isValidGrid } from "./GridUtils";
 
 const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
-    const gridItems = GridUtils.getGridItems(grid);
-    if (GridUtils.isValidGrid(gridItems)) {
-        const gridItemsStyles = GridUtils.getGridItemsStyles(gridItems);
+    const gridItems = getGridItems(grid);
+    if (isValidGrid(gridItems)) {
+        const gridItemsStyles = getGridItemsStyles(gridItems);
         return (
             <div className="gridBox">
                 {children.map((child, index) => {
@@ -20,7 +20,7 @@ const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
         );
     }
     return (
-        <div style={GridUtils.getBaseGridStyles(baseGrid, gapColumn)}>
+        <div style={getBaseGridStyles(baseGrid, gapColumn)}>
             {children.map((child, index) => {
                 return <div key={`griditem_${index}`}>{child}</div>;
             })}
