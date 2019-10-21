@@ -31,6 +31,7 @@ const GridLayoutRow = ({ children, grid, gapColumn, baseGrid }) => {
 GridLayoutRow.defaultProps = {
     baseGrid: 12,
     gapColumn: 1,
+    grid: '',
 };
 
 GridLayoutRow.propTypes = {
