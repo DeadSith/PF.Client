@@ -1,5 +1,3 @@
-import { range } from 'lodash';
-
 const isGapDimension = dimension => dimension.split('_').length > 1;
 const getGap = gridProps => gridProps.split('_')[1];
 export const getGridItems = grid => {
