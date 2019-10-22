@@ -36,13 +36,11 @@ export const getGridItemsStyles = gridItems => {
     return gridStyles;
 };
 
-export const getGridSchema = baseGrid => range(baseGrid).reduce(arr => [...arr, '1fr'], []);
-
-export const getBaseGridStyles = (baseGrid, gapColumn) => {
+export const getBaseGridStyles = gapColumn => {
     return {
         display: 'grid',
         gridColumnGap: `${gapColumn}em`,
-        gridTemplateColumns: getGridSchema(baseGrid).join(' '),
+        gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
     };
 };
 
