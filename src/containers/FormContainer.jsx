@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Input from "./../components/Input/Input";
 import Button from "../components/Button/Button";
+import Select from "../components/Select/Select";
 
 class FormContainer extends Component {
   constructor(props) {
@@ -8,8 +9,12 @@ class FormContainer extends Component {
 
     this.state = {
       newUser: {
-        name: ""
+        name: "",
+        gender: ""
       },
+
+      genderOptions: ["Male", "Female"]
+
     };
 
     this.handleInput = this.handleInput.bind(this);  
@@ -67,7 +72,8 @@ class FormContainer extends Component {
     e.preventDefault();
     this.setState({
       newUser: {
-        name: ""
+        name: "",
+        gender: ""
       }
     });
   }
@@ -84,6 +90,15 @@ class FormContainer extends Component {
           handleChange={this.handleInput}
         />{" "}
     
+        <Select
+          title={"Gender"}
+          name={"gender"}
+          options={this.state.genderOptions}
+          value={this.state.newUser.gender}
+          placeholder={"Select Gender"}
+          handleChange={this.handleInput}
+        />{" "}
+
         <Button
           action={this.handleFormSubmit}
           type={"primary"}
