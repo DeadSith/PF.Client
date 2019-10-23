@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import NavigationBar from '../navigation/NavigationBar';
-import EnhanceЕdTable from '../table/EnhanceЕdTable';
-import MaterialTableDemo from '../table/MaterialTableDemo';
+import BaseTable from '../table/BaseTable';
 import '../styles.scss';
 import GridLayout, { GridLayoutRow } from '../GridLayout';
 
@@ -46,7 +45,7 @@ class AppLayout extends Component {
                                 </GridLayout>
                             )}
                         />
-                        <Route path="/settings" render={() => <EnhanceЕdTable />} />
+                        <Route path="/settings" render={() => <BaseTable />} />
                         <Redirect exact from="/" to="/people" />
                     </Switch>
                 </BrowserRouter>
