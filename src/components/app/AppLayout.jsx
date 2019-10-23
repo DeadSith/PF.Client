@@ -5,6 +5,8 @@ import EnhanceЕdTable from '../table/EnhanceЕdTable';
 import MaterialTableDemo from '../table/MaterialTableDemo';
 import '../styles.scss';
 import GridLayout, { GridLayoutRow } from '../GridLayout';
+import FormContainer from "../../containers/FormContainer";
+
 
 class AppLayout extends Component {
     async componentDidMount() {}
@@ -22,6 +24,11 @@ class AppLayout extends Component {
                 id: 'settings',
                 title: 'Settings',
                 path: '/settings',
+            },
+            {
+                id: 'form',
+                title: 'Form',
+                path: '/form',
             },
         ];
 
@@ -47,6 +54,8 @@ class AppLayout extends Component {
                             )}
                         />
                         <Route path="/settings" render={() => <EnhanceЕdTable />} />
+                        <Route path="/form"  render={() => <FormContainer />
+} />
                         <Redirect exact from="/" to="/people" />
                     </Switch>
                 </BrowserRouter>
