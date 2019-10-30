@@ -37,13 +37,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function BaseTable({rowsData, headCells}) {
+export default function BaseTable({rowsData, headCells, orderColumnBy}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState(orderColumnBy);
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event, property) => {

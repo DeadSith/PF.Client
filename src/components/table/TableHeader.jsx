@@ -20,7 +20,6 @@ export default function TableHeader(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
         {props.headCells.map(headCell => (

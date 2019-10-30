@@ -46,6 +46,11 @@ class AppLayout extends Component {
                 path: '/people',
             },
             {
+              id: 'pensioners',
+              title: 'Pensioners',
+              path: '/pensioners',
+            },
+            {
                 id: 'settings',
                 title: 'Settings',
                 path: '/settings',
@@ -73,7 +78,8 @@ class AppLayout extends Component {
                                 </GridLayout>
                             )}
                         />
-                        <Route path="/settings" render={() => <BaseTable headCells={headCells} rowsData={rowsData} />} />
+                        <Route path="/pensioners" render={() => <BaseTable headCells={headCells} rowsData={rowsData} orderColumnBy={"name"} />} />
+                        <Route path="/settings" render={() => <p>Setting content</p>} />
                         <Redirect exact from="/" to="/people" />
                     </Switch>
                 </BrowserRouter>
