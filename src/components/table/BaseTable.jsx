@@ -81,6 +81,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
   };
 
   const handleChangePage = (event, newPage) => {
+    console.log('page changed' + newPage);
     setPage(newPage);
   };
 
@@ -112,7 +113,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
               rowCount={rowsData.length}
             />
             <TableBody>
-              {stableSort(rowsData, getSorting(order, orderBy))
+              {stableSort(rowsData, getSorting(order, orderBy)) // toDo: understand what happens here !!!!????
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((rowsData, index) => {
                   const isItemSelected = isSelected(rowsData.name);
