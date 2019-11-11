@@ -9,6 +9,17 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TableHeader from "./TableHeader";
 import { desc, stableSort, getSorting} from "./TableUtils";
 
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const test = [
+  createData('Cupcake', 305, 3.7, 67, 4.3),
+  createData('Donut', 452, 25.0, 51, 4.9),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0)
+];
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -42,8 +53,9 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState(orderColumnBy);
   const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+
+  const [tableData, setTableData] = React.useState(rowsData);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -81,18 +93,19 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
   };
 
   const handleChangePage = (event, newPage) => {
+    console.log(event);
     console.log('page changed' + newPage);
-    setPage(newPage);
+    setTableData(test);
+
   };
 
   const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+
   };
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rowsData.length - page * rowsPerPage);
+ // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rowsData.length - page * rowsPerPage);
 
   return (
     <>
@@ -113,8 +126,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
               rowCount={rowsData.length}
             />
             <TableBody>
-              {stableSort(rowsData, getSorting(order, orderBy)) // toDo: understand what happens here !!!!????
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              {tableData
                 .map((rowsData, index) => {
                   const isItemSelected = isSelected(rowsData.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -145,19 +157,12 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         <TablePagination
           rowsPerPageOptions={[10]}
           component="div"
           count={rowsData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
           backIconButtonProps={{
             'aria-label': 'previous page',
           }}
