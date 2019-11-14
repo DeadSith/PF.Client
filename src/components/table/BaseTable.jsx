@@ -9,17 +9,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TableHeader from "./TableHeader";
 import { desc, stableSort, getSorting} from "./TableUtils";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const test = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0)
-];
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -53,9 +42,6 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState(orderColumnBy);
   const [selected, setSelected] = React.useState([]);
-
-
-  const [tableData, setTableData] = React.useState(rowsData);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -92,16 +78,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event, newPage) => {
-    console.log(event);
-    console.log('page changed' + newPage);
-    setTableData(test);
 
-  };
-
-  const handleChangeRowsPerPage = event => {
-
-  };
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
@@ -126,7 +103,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
               rowCount={rowsData.length}
             />
             <TableBody>
-              {tableData
+              {rowsData
                 .map((rowsData, index) => {
                   const isItemSelected = isSelected(rowsData.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -159,19 +136,6 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
                 })}
             </TableBody>
           </Table>
-        <TablePagination
-          rowsPerPageOptions={[10]}
-          component="div"
-          count={rowsData.length}
-          backIconButtonProps={{
-            'aria-label': 'previous page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'next page',
-          }}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
       </>
   );
 }
