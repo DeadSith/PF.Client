@@ -6,6 +6,8 @@ import '../styles.scss';
 import GridLayout, { GridLayoutRow } from '../GridLayout';
 import TableContainer from "../table/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
+import PensionersContainer from "../pensioners/PensionersContainer";
+import PensionersTable from "../pensioners/PensioanersTable";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -97,22 +99,14 @@ const AppLayout = () => {
                         )}
                     />
                     <Route path="/pensioners" render={() =>
-                        <TableContainer >
-                            <BaseTable headCells={headCells} rowsData={tableData} orderColumnBy={"name"} />
-                            <TablePagination
-                              rowsPerPageOptions={[10]}
-                              component="div"
-                              count={rowsData.length}
-                              backIconButtonProps={{
-                                'aria-label': 'previous page',
-                              }}
-                              nextIconButtonProps={{
-                                'aria-label': 'next page',
-                              }}
-                              onChangePage={handleChangePage}
-                              onChangeRowsPerPage={handleChangeRowsPerPage}
-                            />
-                        </TableContainer>
+                      <PensionersContainer>
+                        <PensionersTable
+                          tableData={tableData}
+                          headCells={headCells}
+                          handleChangePage={handleChangePage}
+                          handleChangeRowsPerPage={handleChangeRowsPerPage}
+                        />
+                      </PensionersContainer>
                     } />
                     <Route path="/settings" render={() => <p>Setting content</p>} />
                     <Redirect exact from="/" to="/people" />
