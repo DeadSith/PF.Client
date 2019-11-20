@@ -20,18 +20,18 @@ export default function BasicTextFields() {
   return (
     <form className={classes.container} noValidate autoComplete="off">
       <div>
-<TextField
-          required
-          id="outlined-required"
-          label="Name"
-          placeholder="Pensioner`s name"
+        <TextField
+          type="number"
           className={classes.textField}
+          label="Experience"
+          helperText="Work experience (years)"
+          InputLabelProps={{
+            shrink: true,
+          }}
           margin="normal"
           variant="outlined"
-          helperText="Some important text"
         />
-
-      </div>
+        </div>
     </form>
   );
 }
