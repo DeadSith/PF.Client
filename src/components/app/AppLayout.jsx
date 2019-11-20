@@ -48,16 +48,6 @@ const AppLayout = () => {
 
   const [tableData, setTableData] = React.useState(rowsData);
 
-    const handleChangePage = (event, newPage) => {
-      console.log(event);
-      console.log('page changed' + newPage);
-      setTableData(test);
-
-    };
-
-    const handleChangeRowsPerPage = event => {
-
-    };
 
     const globalNavTabs = [
         {
@@ -99,14 +89,10 @@ const AppLayout = () => {
                         )}
                     />
                     <Route path="/pensioners" render={() =>
-                      <PensionersContainer>
-                        <PensionersTable
-                          tableData={tableData}
-                          headCells={headCells}
-                          handleChangePage={handleChangePage}
-                          handleChangeRowsPerPage={handleChangeRowsPerPage}
-                        />
-                      </PensionersContainer>
+                      <PensionersContainer
+                        tableData={tableData}
+                        headCells={headCells}
+                      />
                     } />
                     <Route path="/settings" render={() => <p>Setting content</p>} />
                     <Redirect exact from="/" to="/people" />
