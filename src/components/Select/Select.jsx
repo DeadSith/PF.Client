@@ -1,29 +1,67 @@
-import React from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import NativeSelect from '@material-ui/core/NativeSelect';
 
-const Select = props => {
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+export default function NativeSelects() {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    gender: '',
+  });
+
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
+
+  const handleChange = name => event => {
+    setState({
+      ...state,
+      [name]: event.target.value,
+    });
+  };
+
   return (
-    <div className="form-group">
-      <label for={props.name}> {props.title} </label>
-      <select
-        id={props.name}
-        name={props.name}
-        value={props.value}
-        onChange={props.handleChange}
-        className="form-control"
-      >
-        <option value="" disabled>
-          {props.placeholder}
-        </option>
-        {props.options.map(option => {
-          return (
-            <option key={option} value={option} label={option}>
-              {option}
-            </option>
-          );
-        })}
-      </select>
+    <div>
+
+        <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel ref={inputLabel} htmlFor="outlined-age-native-simple">
+          Gender
+         </InputLabel> 
+        <Select
+          native
+          value={state.gender}
+          variant="outlined"
+          label="Gender"
+          placeholder="Gender"
+          className={classes.formControl}
+          onChange={handleChange('gender')}
+          labelWidth={labelWidth}
+          inputProps={{
+            name: 'gender',
+            id: 'outlined-age-native-simple',
+          }}
+        >
+          <option value="" />
+          <option value={"f"}>Female</option>
+          <option value={"m"}>Male</option>
+        </Select>
+      </FormControl>
+      
     </div>
   );
-};
-
-export default Select;
+}

@@ -18,8 +18,7 @@ export default function BasicTextFields() {
   const classes = useStyles();
 
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <div>
+    
 <TextField
           required
           id="outlined-required"
@@ -31,7 +30,5 @@ export default function BasicTextFields() {
           helperText="Some important text"
         />
 
-      </div>
-    </form>
   );
 }

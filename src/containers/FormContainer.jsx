@@ -3,6 +3,9 @@ import Input from "./../components/Input/Input";
 import Number from "./../components/Number/Number"
 import Button from "../components/Button/Button";
 import Select from "../components/Select/Select";
+import Slider from "../components/Slider/Slider";
+import Switch from "../components/Switch/Switch";
+import DatePicker from "../components/DatePicker/DatePicker";
 
 class FormContainer extends Component {
   constructor(props) {
@@ -13,28 +16,25 @@ class FormContainer extends Component {
         name: "",
         gender: ""
       },
-
-      genderOptions: ["Male", "Female"]
-
     };
 
-    this.handleFullName = this.handleFullName.bind(this);
+    //this.handleFullName = this.handleFullName.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);   
   }
 
-  handleFullName(e) {
-    let value = e.target.value;
-    this.setState(
-      prevState => ({
-        newUser: {
-          ...prevState.newUser,
-          name: value
-        }
-      }),
-      () => console.log(this.state.newUser)
-    );
-  }
+  // handleFullName(e) {
+  //   let value = e.target.value;
+  //   this.setState(
+  //     prevState => ({
+  //       newUser: {
+  //         ...prevState.newUser,
+  //         name: value
+  //       }
+  //     }),
+  //     () => console.log(this.state.newUser)
+  //   );
+  // }
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -71,27 +71,16 @@ class FormContainer extends Component {
 
         <Number/>{" "}
 
-        <Select
-          title={"Gender"}
-          name={"gender"}
-          options={this.state.genderOptions}
-          value={this.state.newUser.gender}
-          placeholder={"Gender"}
-          handleChange={this.handleInput}
-        />{" "}
+        <Select/>{" "}
 
-        <Button
-          action={this.handleFormSubmit}
-          type={"primary"}
-          title={"Submit"}
-        />{" "}
+        <DatePicker/>{" "}
 
-        <Button
-          action={this.handleClearForm}
-          type={"secondary"}
-          title={"Clear"}
-        />{" "}
+        <Switch/>{" "}
 
+        <Button/>{" "}
+
+{/* the idea of this component, Slider,  is to show percentage of filling the form with data */}
+        <Slider/>{" "}
       </form>
     );
   }
