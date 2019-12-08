@@ -78,11 +78,7 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
     setSelected(newSelected);
   };
 
-
-
   const isSelected = name => selected.indexOf(name) !== -1;
-
- // const emptyRows = rowsPerPage - Math.min(rowsPerPage, rowsData.length - page * rowsPerPage);
 
   return (
     <>
@@ -118,19 +114,14 @@ export default function BaseTable({rowsData, headCells, orderColumnBy}) {
                       key={rowsData.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                      <TableCell key={`checkbox-${index}`} padding="checkbox">
+                        <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }}/>
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {rowsData.name}
-                      </TableCell>
-                      <TableCell align="right">{rowsData.calories}</TableCell>
-                      <TableCell align="right">{rowsData.fat}</TableCell>
-                      <TableCell align="right">{rowsData.carbs}</TableCell>
-                      <TableCell align="right">{rowsData.protein}</TableCell>
+                      <TableCell key={`${rowsData.id}-${index}`} scope="row" padding="none">{rowsData.id}</TableCell>
+                      <TableCell key={`${rowsData.name}-${index}`} scope="row" padding="none">{rowsData.name}</TableCell>
+                      <TableCell key={`${rowsData.dateOfBirth}-${index}`} scope="row" padding="none">{rowsData.dateOfBirth}</TableCell>
+                      <TableCell key={`${rowsData.sex}-${index}`} scope="row" padding="none">{rowsData.sex}</TableCell>
+                      <TableCell key={`${rowsData.modifier}-${index}`} scope="row" padding="none">{rowsData.modifier}</TableCell>
                     </TableRow>
                   );
                 })}

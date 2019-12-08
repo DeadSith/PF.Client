@@ -3,8 +3,7 @@ import TableContainer from "../table/TableContainer";
 import BaseTable from "../table/BaseTable";
 import TablePagination from "@material-ui/core/TablePagination/TablePagination";
 
-const PensionersTable = ({ headCells, tableData, test })  => {
-  console.log(tableData);
+const PensionersTable = ({ headCells, tableData })  => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
